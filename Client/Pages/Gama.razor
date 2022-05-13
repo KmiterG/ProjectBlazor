@@ -1,0 +1,63 @@
+﻿@page "/gama"
+<style type="text/css">
+    body
+    {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgba(0,212,255,1) 100%);
+        color: #FFFFFF;
+        height: 100%;
+        text-shadow: #000000 0.4em 0.4em 0.4em;
+    }
+    .aa
+    {
+        text-align: center;
+        height: 50px;
+    }
+    .cc
+    {
+        width: 300px;
+        height: 300px;
+        margin: 3px;
+        padding: 3px;
+        text-align:center;
+        border: medium solid #000000;
+        border-radius: 10px;
+        float: left;
+    }
+    .bb
+    {
+        width: 100%;
+        height: 60%;
+    }
+</style>
+<PageTitle>Samochody</PageTitle>
+<div class="m-4 aa">
+    <h1>Gama Naszych produktów</h1>
+</div>
+@foreach (var g in gamas)
+{
+    <div class="cc">
+        <h5>@g.NameCar</h5>
+        <p>@g.Price</p>
+        <p>@g.Description</p>
+        <img class="bb" src="@g.Image" />
+    </div>
+}
+@code {
+
+    List<Gamas> gamas;
+
+    protected override void OnInitialized()
+    {
+        gamas = new List<Gamas>()
+        {
+            new Gamas() {CarId = 1, NameCar = "BMW M2", Price = "Już od 599 zł/doba",Description = "3.0l Benzyna 410 KM", Image="Obrazy/bmw-m2.jpg"},
+            new Gamas() {CarId = 2, NameCar = "Volvo V60", Price = "Już od 499 zł/doba",Description = "2.0l T6 Benzyna 310 KM", Image="Obrazy/volvo-v60.jpg"},
+            new Gamas() {CarId = 3, NameCar = "Hyundai i30", Price = "Już od 299 zł/doba",Description = "2.0l GDI Benzyna 250 KM", Image="Obrazy/hyundai-i30.jpg"},
+            new Gamas() {CarId = 4, NameCar = "Porsche 911 GTS", Price = "Już od 899 zł/doba",Description = "3.0l Benzyna 480 KM", Image="Obrazy/porsche911-gts.jpg"},
+            new Gamas() {CarId = 5, NameCar = "Lexus NX 300H", Price = "Już od 499 zł/doba",Description = "2.5l Elektryczny 155 KM", Image="Obrazy/lexus-nx.jpg"},
+            new Gamas() {CarId = 6, NameCar = "Skoda Superb", Price = "Już od 499 zł/doba",Description = "2.0l Benzyna 272 KM", Image="Obrazy/skoda-superb.jpg"},
+            new Gamas() {CarId = 7, NameCar = "Golf 8 GTE", Price = "Już od 399 zł/doba",Description = "1.4l Hybryda 245 KM", Image="Obrazy/golf-gte.jpg"},
+        };
+    }
+}

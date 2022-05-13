@@ -1,0 +1,86 @@
+﻿@page "/rozwoj"
+<style type="text/css">
+    body
+    {
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgba(0,212,255,1) 100%);
+        color: #FFFFFF;
+        height: 100%;
+        text-shadow: #000000 0.4em 0.4em 0.4em;
+    }
+    
+</style>
+
+<PageTitle>Propozycja Rozwoju</PageTitle>
+
+<h1>Propozycja Rozwoju</h1>
+
+<div class="mt-5" style="height:50%;">
+    @if(rozwoje != null)
+    {
+        <table class="table" style="color: #FFFFFF;">
+            <thead>
+                <tr>
+                 <th>#</th>
+                 <th>Nick</th>
+                 <th>Wiadomość</th>
+               </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in rozwoje)
+                {
+                    <tr>
+                      <th>@r.RozwojId</th>
+                      <td>@r.Nick</td>
+                      <td>@r.Wiadomosc</td>
+                    </tr>
+                }
+             </tbody>
+        </table>
+     }
+     else
+     {
+        <div>Proszę czekać na wczytanie recenzji...</div>
+     }
+
+</div>
+<div class="m-4">
+    <h1>Pomóż nam w rozwoju !</h1>
+      <div class="form-group mt-2">
+        <label for="nick">Nick</label>
+        <input type="text" class="form-control" id="nick" @bind-value="@nickhtml">
+      </div>
+      <div class="form-group mt-2">
+        <label for="wiadomosc">Wiadomość</label>
+        <input type="text" class="form-control" id="wiadomosc" @bind-value="@wiadomoschtml">
+      </div>
+      <button class="btn btn-primary mt-4" @onclick="Dodanie">Wyślij</button>
+</div>
+@code{
+
+    List<Rozwoje> rozwoje;
+
+    string nickhtml;
+    string wiadomoschtml;
+
+    protected override void OnInitialized()
+    {
+        rozwoje = new List<Rozwoje>()
+        {
+            new Rozwoje() {RozwojId = 1, Nick = "Maciek", Wiadomosc = "Dodajcie do wypożyczenia BMW E36 M3 !!!"},
+            new Rozwoje() {RozwojId = 2, Nick = "Adam", Wiadomosc = "Brakuje mi tutaj Lexusa :(" }
+        };
+    }
+
+    void Dodanie()
+    {
+        var recenzja = new Rozwoje
+            {
+
+                Nick = nickhtml,
+                Wiadomosc = wiadomoschtml
+            };
+            recenzja.RozwojId = rozwoje.Max(s => s.RozwojId) + 1;
+            rozwoje.Add(recenzja);
+    }
+}
